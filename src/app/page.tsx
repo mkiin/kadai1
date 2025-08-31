@@ -1,103 +1,125 @@
-import Image from "next/image";
+
+"use client"
+
+import { useState } from "react"
+
+type RecordType = {
+  title: string
+  time: number,
+}
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  // フォームの状態管理
+  const [title, setTitle] = useState("")
+  const [time, setTime] = useState(0)
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  // レコードの状態管理
+  const [records, setRecords] = useState<RecordType[]>([]);
+
+  // 学習時間の合計値
+  const sum = records.reduce((accumulator, currentValue) => {
+    return accumulator + currentValue.time;
+  }, 0);
+
+  // レコードに学習記録を追加する
+  const onSubmit = () => {
+    /* TODO Human: Step 1 - 基本的なバリデーション
+       タイトルが空でないかチェック
+       時間が0より大きいかチェック
+       ヒント: if文で両方の条件をチェック、早期returnパターン
+    */
+    if (title === "" || time <= 0) { return }
+
+    const newRecord: RecordType = {
+      title,
+      time
+    }
+
+    /* TODO Human: Step 2 - 新しいレコードオブジェクトの作成
+       現在のtitleとtimeから新しいRecordTypeオブジェクトを作成
+       ヒント: const newRecord: RecordType = { ... }
+    */
+
+    /* TODO Human: Step 3 - recordsステートの更新
+       setRecordsを使って新しいレコードを追加
+       ヒント: スプレッド演算子[...既存配列, 新要素]を使用
+    */
+    setRecords(prev => [...prev, newRecord]);
+
+    /* TODO Human: Step 4 - 入力フィールドのリセット
+       送信成功後、titleとtimeを初期値に戻す
+       ヒント: setTitle("")とsetTime(0)を呼ぶ
+    */
+    setTitle("");
+    setTime(0);
+  }
+
+  return (
+    <div className="bg-muted min-h-svh flex flex-col items-center justify-center p-6">
+      <div className="w-full max-w-sm md:max-w-3xl">
+        {/* ヘッダー部 */}
+        <div className="">
+          <h1 className="text-3xl font-bold mb-6 text-gray-900">学習記録一覧</h1>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {/* 記録一覧部分 */}
+        <div className="mt-6 space-y-3 bg-white border rounded-lg p-4">
+          {records.length === 0 ? (
+            <div className="text-gray-500 text-center">まだ学習記録がありません</div>
+          ) : (
+            records.map((record) => (
+              <div key={`${record.title}-${record.time}`} className="">
+                <h3 className="font-medium">{record.title}</h3>
+                <p className="text-gray-600">{record.time}時間</p>
+              </div>
+            ))
+          )}
+        </div>
+
+        {/* form 部分 */}
+        <div className="mt-6 bg-white border rounded-lg p-6">
+
+          {/* 学習内容入力 */}
+          <div className="mb-4">
+            <label htmlFor="title" className="block text-sm font-medium mb-1">
+              学習内容
+            </label>
+            <input
+              type="text"
+              className="border rounded px-3 py-1 w-full"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </div>
+
+          {/* 学習時間入力 */}
+          <div className="mb-4">
+            <label htmlFor="title" className="block text-sm font-medium mb-1">
+              学習時間（時間）
+            </label>
+            <input
+              type="number"
+              className="border rounded px-3 py-1 w-full"
+              value={time}
+              onChange={(e) => setTime(Number(e.target.value))}
+            />
+          </div>
+
+          {/* 入力値の確認表示 */}
+          <div className="bg-gray-50 p-3 rounded text-sm mb-4">
+            現在の入力: 学習内容「{title}」、時間「{time}」、合計値「{sum}」
+          </div>
+
+          {/* 登録ボタン */}
+          <button
+            onClick={onSubmit}
+            type="submit"
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full"
+          >
+            登録
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
