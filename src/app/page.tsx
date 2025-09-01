@@ -23,11 +23,7 @@ export default function Home() {
 
   // レコードに学習記録を追加する
   const onSubmit = () => {
-    /* TODO Human: Step 1 - 基本的なバリデーション
-       タイトルが空でないかチェック
-       時間が0より大きいかチェック
-       ヒント: if文で両方の条件をチェック、早期returnパターン
-    */
+
     if (title === "" || time <= 0) { return }
 
     const newRecord: RecordType = {
@@ -35,21 +31,7 @@ export default function Home() {
       time
     }
 
-    /* TODO Human: Step 2 - 新しいレコードオブジェクトの作成
-       現在のtitleとtimeから新しいRecordTypeオブジェクトを作成
-       ヒント: const newRecord: RecordType = { ... }
-    */
-
-    /* TODO Human: Step 3 - recordsステートの更新
-       setRecordsを使って新しいレコードを追加
-       ヒント: スプレッド演算子[...既存配列, 新要素]を使用
-    */
     setRecords(prev => [...prev, newRecord]);
-
-    /* TODO Human: Step 4 - 入力フィールドのリセット
-       送信成功後、titleとtimeを初期値に戻す
-       ヒント: setTitle("")とsetTime(0)を呼ぶ
-    */
     setTitle("");
     setTime(0);
   }
@@ -107,7 +89,7 @@ export default function Home() {
 
           {/* 入力値の確認表示 */}
           <div className="bg-gray-50 p-3 rounded text-sm mb-4">
-            現在の入力: 学習内容「{title}」、時間「{time}」、合計値「{sum}」
+            現在の入力: 学習内容「{title}」、時間「{time}」、合計時間「{sum}」
           </div>
 
           {/* 登録ボタン */}
