@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# kadai1 - 学習記録アプリ
 
-## Getting Started
+Next.js 15とReact 19を使用したモダンな学習記録管理Webアプリケーションです。学習内容と時間を記録・管理できます。
 
-First, run the development server:
+## 機能概要
+
+- 学習記録の作成・表示
+- 学習時間の合計表示
+- リアルタイムな入力値確認
+
+## 技術スタック
+
+- **フロントエンド**: Next.js 15, React 19, TypeScript
+- **UIライブラリ**: Tailwind CSS, Radix UI, shadcn/ui
+- **状態管理**: React Hooks (useState)
+- **ビルドツール**: Turbopack
+- **コード品質**: Biome (Linter/Formatter)
+- **パッケージマネージャー**: pnpm
+
+## 環境設定
+
+### 1. リポジトリをクローン
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <your-repository-url>
+cd kadai1
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. 依存関係のインストール
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 起動方法
 
-## Learn More
+### 開発サーバーの起動
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+pnpm dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+アプリケーションは http://localhost:3000 で起動します。
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 本番ビルド
 
-## Deploy on Vercel
+```bash
+pnpm build
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 本番サーバーの起動
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+pnpm start
+```
+
+### その他コマンド
+
+```bash
+# リント実行
+pnpm lint
+
+# フォーマット実行
+pnpm format
+```
+
+## プロジェクト構造
+
+```
+kadai1/
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx          # アプリケーション全体のレイアウト
+│   │   └── page.tsx            # メインページ（学習記録アプリ）
+│   ├── components/ui/          # UIコンポーネント（shadcn/ui）
+│   ├── hooks/                  # カスタムフック
+│   └── lib/                    # ユーティリティ関数
+├── public/                     # 静的ファイル
+├── biome.json                  # Biome設定
+├── components.json             # shadcn/ui設定
+├── next.config.ts              # Next.js設定
+├── tailwind.config.ts          # Tailwind CSS設定
+├── tsconfig.json               # TypeScript設定
+└── README.md                   # このファイル
+```
+

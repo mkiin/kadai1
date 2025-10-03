@@ -39,3 +39,20 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+dist
+dist-ssr
+
+count.txt
+.nitro
+.tanstack
+
+
+# serena
+.serena
+
+# firebase
+.firebase
+
+# claude code
+.claude
