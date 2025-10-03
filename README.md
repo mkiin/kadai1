@@ -22,7 +22,7 @@ Next.js 15とReact 19を使用したモダンな学習記録管理Webアプリ�
 ### 1. リポジトリをクローン
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/mkiin/kadai1.git
 cd kadai1
 ```
 
